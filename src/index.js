@@ -84,3 +84,37 @@ console.log({transformed})
 const transformPipe = pipe(trim, toLowerCase, wrapInDiv);
 const transformedPipe = transformPipe('   Elvi     ');
 console.log({transformedPipe})
+
+// VIDEO 7 CURRYING
+
+// Queremos hacer otra función que se llame wrapInSpan sería similar a wrapInDiv
+const wrapInSpan = str => `<span>${str}</span>`;
+// como se parece bastante a wrapInDiv queremos hacer una función wrap que generalice ambas
+
+const wrap = (type, str) => `<${type}>${str}</${type}>`
+console.log(wrap('button','Click'))
+
+// El problema es que ahora si hacemos pipe con esta función wrap, wrap tiene dos argumentos y da error
+const transformWrap = pipe(trim, toLowerCase, wrap);
+console.log(transformWrap('  Click   ')) //<click>undefined</click>
+// lo va ejecutando de derecha a izquierda
+console.log(pipe(trim)('  Click   ')) // devuelve 'Click'
+console.log(pipe(trim, toLowerCase)('  Click   ')) // devuelve click
+// por último haría wrap(irene) wrap tiene dos argumentos type y str así que irene lo toma como si fuera el type
+// querríamos hacer algo tipo 
+//const transformWrap2 = pipe(trim, toLowerCase, wrap('button'))
+// pero esto no funciona porque pipe necesita que le pasemos una función como parámetro y wrap('button') es un string
+
+// Tecnica Currying, transforma una función con n argumentos en una función con 1 argumento
+
+const add = (a,b) => a + b;
+console.log(add(2,5))
+const add2 = a => b => a + b;
+console.log(add2(2)(5))
+
+// así transformamos wrap en wrap2
+const wrap2 = type => str => `<${type}>${str}</${type}>`
+
+const transformWrap2 = pipe(trim, toLowerCase, wrap2('button'));
+const transformed2 = transformWrap2('   Click    ')
+console.log({transformed2})
