@@ -1,3 +1,5 @@
+import { compose, pipe } from 'lodash/fp';
+
 //video 3
 
 function sayHello() {
@@ -34,12 +36,12 @@ function sayBye() {
     }
 }
 
-fn2 = sayBye;
-console.log({fn2})
-console.log(fn2())
-console.log(fn2()())
-fn2 = sayBye();
-console.log({fn2})
+// fn2 = sayBye;
+// console.log({fn2})
+// console.log(fn2())
+// console.log(fn2()())
+// fn2 = sayBye();
+// console.log({fn2})
 
 //HIGHER ORDER FUNCTIONS
 let numbers = [1, 2, 3];
@@ -64,3 +66,21 @@ const wrapInDiv = str => `<div>${str}</div>`;
 const toLowerCase = str => str.toLowerCase();
 const result = wrapInDiv(toLowerCase(trim('   Haskell   ')));
 console.log({result});
+
+// Hay dos problemas en result
+//1- tenemos que leer de derecha a izquierda, tenemos un input lo trimeamos, lo pasamos a minúsculas...
+//2- muchos paréntesis
+
+//Instalamos lodash compose y pipe
+// compose es una higher order function
+
+// Para lo de los paréntesis usamos compose
+const transform = compose(wrapInDiv, toLowerCase, trim);
+const transformed = transform('  Irene   ');
+console.log({transformed})
+
+// Para lo de leer de derecha a izquierda usamos pipe
+
+const transformPipe = pipe(trim, toLowerCase, wrapInDiv);
+const transformedPipe = transformPipe('   Elvi     ');
+console.log({transformedPipe})
