@@ -1,0 +1,28 @@
+Functional Programming in Javascript
+
+Es un paradigma de programación
+    Functional
+    Object-oriented
+    Procedural
+    Event-driven
+
+Algunos lenguajes de programación funcional son
+    Haskell
+    Clojure
+Javascript es un multi-paradigm programming lenguage.
+
+VIDEO 3 FUNCTIONS AS FIRST CLASS CITIZENS
+    Esto significa que las podemos tratar igual que otras variables. Podemos:
+    -Assign to a variable
+    -Pass as an argument
+    -Return from other functions
+
+VIDEO 4 HIGHER-ORDER FUNCTIONS
+
+    A higher order function, is a function that
+        takes a function as an argument
+    or returns a function
+    or both
+
+VIDEO 5 FUNCTION COMPOSITION
+
