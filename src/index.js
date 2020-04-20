@@ -118,3 +118,20 @@ const wrap2 = type => str => `<${type}>${str}</${type}>`
 const transformWrap2 = pipe(trim, toLowerCase, wrap2('button'));
 const transformed2 = transformWrap2('   Click    ')
 console.log({transformed2})
+
+// VIDEO 8 PURE FUNCTIONS
+// no es pura
+const randomFunction = number => number * Math.random();
+
+// sí es pura
+
+const function2 = number => number * 2;
+
+// En general, si queremos una función pura no podemos usar
+//No random values
+// no current date/ time
+// no global state dom, files, db
+// no mutation of parameters
+// tampoco es pura por lo de mutation parameters, porque minAge no está definida aquí y puede ser variable
+const isElilible = age => age > minAge;
+

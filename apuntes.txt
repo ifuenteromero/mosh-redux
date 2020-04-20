@@ -28,3 +28,5 @@ VIDEO 7 CURRYING
 HASKELL CURRY
 
 
+VIDEO 8 PURE FUNCTIONS
+Una función es pura si fijados los argumentos, siempre retorna lo mismo
