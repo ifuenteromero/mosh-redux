@@ -186,4 +186,12 @@ console.log({removed});
 // Updating an item
 // Cambio el 3 por 30
 const arrayUpdated = arrayNumbers.map(n => n === 3 ? 30 : n);
-console.log({arrayUpdated})
+console.log({arrayUpdated});
+// Enforcing Inmulatibility
+// librerías
+// Inmutable (Facebook)
+// Immer
+// Mori
+
+// Inmutable.js
+// npm install immutable (con dos emes)
