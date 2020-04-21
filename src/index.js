@@ -22,11 +22,13 @@ function logHello() {
     console.log('Hello');
 }
 
-function run(fn){
-    fn();
+function run(fn, arg1){
+    () => fn(arg1);
 }
 
-// run(logHello)
+
+run(logHello)
+
 
 //Return from other function
 
@@ -133,5 +135,55 @@ const function2 = number => number * 2;
 // no global state dom, files, db
 // no mutation of parameters
 // tampoco es pura por lo de mutation parameters, porque minAge no está definida aquí y puede ser variable
-const isElilible = age => age > minAge;
+const isEligible = age => age > minAge;
+// sería pura así
+const isEligible2 = (age, minAge) => age > minAge;
 
+
+//VIDEO 10 UPDATING OBJECTS
+// Object.assign() y el spread operator son equivalentes 
+const person = { 
+    name: 'Irene',
+    address: {
+        country: 'España',
+        city: 'Madrid'
+    } 
+};
+const updated = Object.assign({}, person, { name: 'Elvira' });
+console.log({updated});
+const updated2 = {...person, name: 'Elvira'}
+
+// Si hacemos directamente
+updated.name = 'Mosh';
+//para claves de primer nivel, person no cambia, pero para las de segundo nivel cambia person
+console.log({person});
+console.log({updated});
+updated.address.country = 'USA';
+console.log({person});
+console.log({updated});
+
+// INMUTABILITY IN ARRAYS
+const arrayNumbers = [1, 2, 3];
+// Adding an item
+    // al final
+    let added = [...arrayNumbers, 4];
+    console.log({added});
+    // al principio
+    added = [0, ...arrayNumbers];
+    console.log({added});
+    // en la iésima posición, por ejemplo la 2
+    const index = arrayNumbers.indexOf(2);
+    added = [
+        ...arrayNumbers.slice(0, index),
+        1.5,
+        ...arrayNumbers.slice(index)
+        ];
+    console.log({added})
+// Removing an item
+const removed = arrayNumbers.filter(n => n!==2);
+console.log({removed});
+
+// Updating an item
+// Cambio el 3 por 30
+const arrayUpdated = arrayNumbers.map(n => n === 3 ? 30 : n);
+console.log({arrayUpdated})
