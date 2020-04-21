@@ -63,11 +63,11 @@ console.log({output})
 //trim
 //wrap in div
 
-const trim = str => str.trim();
-const wrapInDiv = str => `<div>${str}</div>`;
-const toLowerCase = str => str.toLowerCase();
-const result = wrapInDiv(toLowerCase(trim('   Haskell   ')));
-console.log({result});
+// const trim = str => str.trim();
+// const wrapInDiv = str => `<div>${str}</div>`;
+// const toLowerCase = str => str.toLowerCase();
+// const result = wrapInDiv(toLowerCase(trim('   Haskell   ')));
+// console.log({result});
 
 // Hay dos problemas en result
 //1- tenemos que leer de derecha a izquierda, tenemos un input lo trimeamos, lo pasamos a minúsculas...
@@ -77,31 +77,31 @@ console.log({result});
 // compose es una higher order function
 
 // Para lo de los paréntesis usamos compose
-const transform = compose(wrapInDiv, toLowerCase, trim);
-const transformed = transform('  Irene   ');
-console.log({transformed})
+// const transform = compose(wrapInDiv, toLowerCase, trim);
+// const transformed = transform('  Irene   ');
+// console.log({transformed})
 
-// Para lo de leer de derecha a izquierda usamos pipe
+// // Para lo de leer de derecha a izquierda usamos pipe
 
-const transformPipe = pipe(trim, toLowerCase, wrapInDiv);
-const transformedPipe = transformPipe('   Elvi     ');
-console.log({transformedPipe})
+// const transformPipe = pipe(trim, toLowerCase, wrapInDiv);
+// const transformedPipe = transformPipe('   Elvi     ');
+// console.log({transformedPipe})
 
 // VIDEO 7 CURRYING
 
 // Queremos hacer otra función que se llame wrapInSpan sería similar a wrapInDiv
-const wrapInSpan = str => `<span>${str}</span>`;
-// como se parece bastante a wrapInDiv queremos hacer una función wrap que generalice ambas
+// const wrapInSpan = str => `<span>${str}</span>`;
+// // como se parece bastante a wrapInDiv queremos hacer una función wrap que generalice ambas
 
-const wrap = (type, str) => `<${type}>${str}</${type}>`
-console.log(wrap('button','Click'))
+// const wrap = (type, str) => `<${type}>${str}</${type}>`
+// console.log(wrap('button','Click'))
 
-// El problema es que ahora si hacemos pipe con esta función wrap, wrap tiene dos argumentos y da error
-const transformWrap = pipe(trim, toLowerCase, wrap);
-console.log(transformWrap('  Click   ')) //<click>undefined</click>
-// lo va ejecutando de derecha a izquierda
-console.log(pipe(trim)('  Click   ')) // devuelve 'Click'
-console.log(pipe(trim, toLowerCase)('  Click   ')) // devuelve click
+// // El problema es que ahora si hacemos pipe con esta función wrap, wrap tiene dos argumentos y da error
+// const transformWrap = pipe(trim, toLowerCase, wrap);
+// console.log(transformWrap('  Click   ')) //<click>undefined</click>
+// // lo va ejecutando de derecha a izquierda
+// console.log(pipe(trim)('  Click   ')) // devuelve 'Click'
+// console.log(pipe(trim, toLowerCase)('  Click   ')) // devuelve click
 // por último haría wrap(irene) wrap tiene dos argumentos type y str así que irene lo toma como si fuera el type
 // querríamos hacer algo tipo 
 //const transformWrap2 = pipe(trim, toLowerCase, wrap('button'))
@@ -117,9 +117,9 @@ console.log(add2(2)(5))
 // así transformamos wrap en wrap2
 const wrap2 = type => str => `<${type}>${str}</${type}>`
 
-const transformWrap2 = pipe(trim, toLowerCase, wrap2('button'));
-const transformed2 = transformWrap2('   Click    ')
-console.log({transformed2})
+// const transformWrap2 = pipe(trim, toLowerCase, wrap2('button'));
+// const transformed2 = transformWrap2('   Click    ')
+// console.log({transformed2})
 
 // VIDEO 8 PURE FUNCTIONS
 // no es pura
@@ -195,3 +195,53 @@ console.log({arrayUpdated});
 
 // Inmutable.js
 // npm install immutable (con dos emes)
+
+
+// Challenge 1
+//Write code in a functional style to convert the input to the output:
+//input = { tag: “JAVASCRIPT” }
+//output = “(javascript)” 
+
+let inputChallenge1 = { tag: "JAVASCRIPT" };
+let outputChallenge1 = "(javascript)";
+console.log({ inputChallenge1, outputChallenge1 });
+const getTag = obj => obj.tag;
+const toLowerCase = str => str.toLowerCase();
+const wrapInParenthesis = str => `(${str})`;
+const transformed = pipe(getTag, toLowerCase, wrapInParenthesis);
+
+console.log(transformed(inputChallenge1))
+
+//Challenge 2.
+//We have a recipe object as follows: 
+let recipe = { 
+    name: 'Spaghetti Bolognese', 
+    ingredients: ['egg', 'salt'] 
+};
+// Assuming that this object is immutable, 
+//write code to 
+// -Add a new ingredient (“cream”) 
+
+let addedRecipe = {
+    ...recipe,
+    ingredients: [...recipe.ingredients,'cream']
+};
+console.log({addedRecipe})
+
+//-Replace “egg” with “egg white”
+let replacedRecipe = {
+    ...recipe,
+    ingredients: recipe.ingredients.map(ingredient => 
+        ingredient === 'egg' ? 'egg white' : ingredient
+    )
+};
+
+console.log({replacedRecipe});
+
+//-Remove an ingredient (“egg”)
+let removedRecipe = {
+    ...recipe,
+    ingredients: recipe.ingredients.filter(ingredient => ingredient !== 'egg')
+}
+
+console.log({removedRecipe})
